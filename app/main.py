@@ -1,1 +1,32 @@
-# write your code here
+import os
+
+
+def move_file(command: str) -> None:
+    command_parts = command.split(" ")
+
+    src_path = command_parts[1]
+    dst_parts = command_parts[2].split("/")
+    dst_dirs = dst_parts[:-1]
+    file_name = dst_parts[-1]
+    new_dir = ""
+
+    with open(src_path, "r") as file:
+        content = file.read()
+
+    if not dst_dirs:
+        with open(file_name, "w") as new_file:
+            new_file.write(content)
+
+    else:
+        for dirs in dst_dirs:
+            new_dir += dirs
+
+            if not os.path.exists(new_dir):
+                os.mkdir(new_dir)
+
+            new_dir += "/"
+
+        with open(new_dir + file_name, "w") as new_file:
+            new_file.write(content)
+
+    os.remove(src_path)
