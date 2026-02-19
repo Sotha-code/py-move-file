@@ -26,14 +26,13 @@ def move_file(command: str) -> None:
 
     else:
         for dirs in dst_dirs:
-            new_dir += dirs
+            new_dir = os.path.join(new_dir, dirs)
 
             if not os.path.exists(new_dir):
                 os.mkdir(new_dir)
 
-            new_dir += "/"
 
-        with open(new_dir + file_name, "w") as new_file:
+        with open(os.path.join(new_dir, file_name), "w") as new_file:
             new_file.write(content)
 
     os.remove(src_path)
