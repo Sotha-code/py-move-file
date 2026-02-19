@@ -31,7 +31,6 @@ def move_file(command: str) -> None:
             if not os.path.exists(new_dir):
                 os.mkdir(new_dir)
 
-
         with open(os.path.join(new_dir, file_name), "w") as new_file:
             new_file.write(content)
 
